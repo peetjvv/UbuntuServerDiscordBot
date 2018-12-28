@@ -1,0 +1,7 @@
+{
+  "bot": {
+    "token": "ENTER YOUR BOT TOKEN HERE"
+  },
+  "prefixChar": "?",
+  "timeout": 30000
+}
