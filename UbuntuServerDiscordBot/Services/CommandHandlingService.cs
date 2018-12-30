@@ -6,7 +6,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 
-namespace UbuntuServerDiscordBot.DiscordBot.Services
+namespace UbuntuServerDiscordBot.Services
 {
     public class CommandHandlingService
     {
@@ -48,7 +48,7 @@ namespace UbuntuServerDiscordBot.DiscordBot.Services
             var argPos = 0;
 
             // ignore messages not mentioning this bot, if set up that way in the config
-            if (string.IsNullOrEmpty(_config["prefix"]) && !message.HasMentionPrefix(_client.CurrentUser, ref argPos))
+            if (string.IsNullOrWhiteSpace(_config["prefix"]) && !message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 return;
             }
@@ -60,7 +60,7 @@ namespace UbuntuServerDiscordBot.DiscordBot.Services
             {
                 if (result.Error.Value == CommandError.UnknownCommand)
                 {
-                    await context.Channel.SendMessageAsync($"Unknown Command, type '{"help"}' for a list commands");
+                    await context.Channel.SendMessageAsync($"Unknown Command, type '{_config["prefix"].Trim()}help' or '@{_client.CurrentUser.Username} help' for a list commands");
                 }
                 else
                 {

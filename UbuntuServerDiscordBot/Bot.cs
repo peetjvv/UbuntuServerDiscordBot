@@ -9,9 +9,9 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using UbuntuServerDiscordBot.DiscordBot.Services;
+using UbuntuServerDiscordBot.Services;
 
-namespace UbuntuServerDiscordBot.DiscordBot
+namespace UbuntuServerDiscordBot
 {
     public class Bot: IDisposable
     {
@@ -27,8 +27,9 @@ namespace UbuntuServerDiscordBot.DiscordBot
 
         public async Task StartAsync()
         {
-
-            _client = new DiscordSocketClient();
+            var clientConfig = new DiscordSocketConfig();
+            clientConfig.ConnectionTimeout = int.Parse(_config["timeout"]);
+            _client = new DiscordSocketClient(clientConfig);
 
             var services = ConfigureServices();
             services.GetRequiredService<LogService>();

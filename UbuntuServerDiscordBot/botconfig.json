@@ -1,6 +1,6 @@
 {
-  "botToken": "ENTER THE BOT TOKEN HERE",
-  "prefix": "?", // if this is empty, the bot will respond to mentions only
-  "defaultChannel": "ENTER DEFAULT CHANNEL HERE (USUALLY #GENERAL)",
+  "botToken": "ENTER YOUR BOT'S TOKEN HERE",
+  "prefix": "$", // NOTE: if this is empty, the bot will respond to mentions only
+  "defaultChannel": "ENTER YOUR DEFAULT CHANNEL'S ID HERE (USUALLY #general)",
   "timeout": 30000
 }

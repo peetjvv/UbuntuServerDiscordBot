@@ -5,10 +5,22 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UbuntuServerDiscordBot.DiscordBot
+namespace UbuntuServerDiscordBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+        [Command("info")]
+        public async Task info()
+        {
+
+        }
+
+        [Command("help")]
+        public async Task help()
+        {
+
+        }
+
         [Command("ping")]
         public async Task ping()
         {

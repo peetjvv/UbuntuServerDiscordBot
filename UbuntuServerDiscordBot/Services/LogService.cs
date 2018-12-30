@@ -5,7 +5,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace UbuntuServerDiscordBot.DiscordBot.Services
+namespace UbuntuServerDiscordBot.Services
 {
     public class LogService
     {
