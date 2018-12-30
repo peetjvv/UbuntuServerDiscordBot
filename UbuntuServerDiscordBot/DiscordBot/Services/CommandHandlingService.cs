@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.Configuration;
 
 namespace UbuntuServerDiscordBot.DiscordBot.Services
 {
@@ -12,14 +13,16 @@ namespace UbuntuServerDiscordBot.DiscordBot.Services
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;
         private IServiceProvider _provider;
+        private IConfiguration _config;
 
         private RequestOptions _reqOptions;
 
-        public CommandHandlingService(IServiceProvider provider, DiscordSocketClient client, CommandService commands)
+        public CommandHandlingService(IServiceProvider provider, DiscordSocketClient client, CommandService commands, IConfiguration config)
         {
             _client = client;
             _commands = commands;
             _provider = provider;
+            _config = config;
 
             _reqOptions = RequestOptions.Default;
             _reqOptions.Timeout = 30000;
@@ -36,7 +39,7 @@ namespace UbuntuServerDiscordBot.DiscordBot.Services
 
         private async Task MessageReceived(SocketMessage rawMessage)
         {
-            // ignore system messages and messages from bots (this bot or other ones)
+            // ignore system messages and messages from bots (this bot or other ones) and webhooks
             if (!(rawMessage is SocketUserMessage message) || message.Source != MessageSource.User)
             {
                 return;
@@ -44,8 +47,8 @@ namespace UbuntuServerDiscordBot.DiscordBot.Services
 
             var argPos = 0;
 
-            // ignore messages not mentioning this bot
-            if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos))
+            // ignore messages not mentioning this bot, if set up that way in the config
+            if (string.IsNullOrEmpty(_config["prefix"]) && !message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 return;
             }

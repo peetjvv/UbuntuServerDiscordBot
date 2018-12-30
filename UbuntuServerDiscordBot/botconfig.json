@@ -1,7 +1,6 @@
 {
-  "bot": {
-    "token": "ENTER YOUR BOT TOKEN HERE"
-  },
-  "prefixChar": "?",
+  "botToken": "ENTER THE BOT TOKEN HERE",
+  "prefix": "?", // if this is empty, the bot will respond to mentions only
+  "defaultChannel": "ENTER DEFAULT CHANNEL HERE (USUALLY #GENERAL)",
   "timeout": 30000
 }

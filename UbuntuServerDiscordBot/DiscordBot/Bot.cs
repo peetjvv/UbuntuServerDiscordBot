@@ -27,13 +27,16 @@ namespace UbuntuServerDiscordBot.DiscordBot
 
         public async Task StartAsync()
         {
+
             _client = new DiscordSocketClient();
 
             var services = ConfigureServices();
             services.GetRequiredService<LogService>();
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync(services);
 
-            await _client.LoginAsync(TokenType.Bot, _config["bot:token"]);
+            _client.Ready += Client_Ready;
+
+            await _client.LoginAsync(TokenType.Bot, _config["botToken"]);
             await _client.StartAsync();
 
             await Task.Delay(-1);
@@ -84,8 +87,16 @@ namespace UbuntuServerDiscordBot.DiscordBot
             }
             return Task.CompletedTask;
         }
-        
-        private Task ReadyAsync()
+
+        public async Task Client_Ready()
+        {
+            var a = new EmbedBuilder();
+            a.WithDescription($"Hi, I just started up and can be found here: {CommandHelpers.GetIPv4Address()}");
+            a.WithTimestamp(DateTime.UtcNow);
+            await ((ISocketMessageChannel)_client.GetChannel(ulong.Parse(_config["defaultChannel"]))).SendMessageAsync("", embed: a);
+        }
+
+        private Task LoginStateAsync()
         {
             Console.WriteLine($"{_client.CurrentUser} is {_client.LoginState}!");
 
