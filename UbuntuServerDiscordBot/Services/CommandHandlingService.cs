@@ -52,6 +52,10 @@ namespace UbuntuServerDiscordBot.Services
             {
                 return;
             }
+            else if (!string.IsNullOrWhiteSpace(_config["prefix"]) && (!message.HasStringPrefix(_config["prefix"], ref argPos) && !message.HasMentionPrefix(_client.CurrentUser, ref argPos)))
+            {
+                return;
+            }
 
             var context = new SocketCommandContext(_client, message);
             var result = await _commands.ExecuteAsync(context, argPos, _provider);
@@ -60,7 +64,7 @@ namespace UbuntuServerDiscordBot.Services
             {
                 if (result.Error.Value == CommandError.UnknownCommand)
                 {
-                    await context.Channel.SendMessageAsync($"Unknown Command, type '{_config["prefix"].Trim()}help' or '@{_client.CurrentUser.Username} help' for a list commands");
+                    await context.Channel.SendMessageAsync($"Unknown Command `{message.Content.ReplaceIfAtStart(_config["prefix"], "")}`, type `{_config["prefix"].Trim()}help` or `@{_client.CurrentUser.Username} help` for a list commands");
                 }
                 else
                 {
