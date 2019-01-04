@@ -91,8 +91,29 @@ namespace UbuntuServerDiscordBot
 
         public async Task Client_Ready()
         {
+            var ipv4 = string.Empty;
+            var ipv6 = string.Empty;
+
+            try
+            {
+                ipv4 = CommandHelpers.GetIPv4Address();
+            }
+            catch (Exception ex)
+            {
+                ipv4 = "IPv4 address not available";
+            }
+
+            try
+            {
+                ipv6 = CommandHelpers.GetIPv6Address();
+            }
+            catch (Exception ex)
+            {
+                ipv6 = "IPv6 address not available";
+            }
+
             var a = new EmbedBuilder();
-            a.WithDescription($"Hi, I just started up and can be found here: {CommandHelpers.GetIPv4Address()}");
+            a.WithDescription($"Hi, I just started up and can be found at `{ipv4}` or `{ipv6}`");
             a.WithTimestamp(DateTime.UtcNow);
             await ((ISocketMessageChannel)_client.GetChannel(ulong.Parse(_config["defaultChannel"]))).SendMessageAsync("", embed: a);
         }
