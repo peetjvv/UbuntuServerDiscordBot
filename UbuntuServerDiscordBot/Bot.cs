@@ -113,7 +113,7 @@ namespace UbuntuServerDiscordBot
             }
 
             var a = new EmbedBuilder();
-            a.WithDescription($"Hi, I just started up and can be found at `{ipv4}` or `{ipv6}`");
+            a.WithDescription($"Hi, I just started up and can be found at `{ipv4}` or `{ipv6}`.\nAsk me something by mentioning me in your message{(!string.IsNullOrWhiteSpace(_config["prefix"]) ? $", or by using the prefix `{_config["prefix"]}`" : "")}");
             a.WithTimestamp(DateTime.UtcNow);
             await ((ISocketMessageChannel)_client.GetChannel(ulong.Parse(_config["defaultChannel"]))).SendMessageAsync("", embed: a.Build());
         }

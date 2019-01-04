@@ -27,7 +27,7 @@ namespace UbuntuServerDiscordBot.Modules
                 $"`{Program.Configuration["prefix"]}info` - Who am I?\n" +
                 $"`{Program.Configuration["prefix"]}help` - What can I do? (this message)\n" +
                 $"`{Program.Configuration["prefix"]}backuphome` - Backup my Home dir\n" +
-                $"`{Program.Configuration["prefix"]}ping` - Am I awake? What's my IP?" +
+                $"`{Program.Configuration["prefix"]}ping` - Am I awake? What's my IP?\n" +
                 $"`{Program.Configuration["prefix"]}status` - How is my HP looking?");
             await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
         }
