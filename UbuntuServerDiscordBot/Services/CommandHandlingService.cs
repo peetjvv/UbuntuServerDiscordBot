@@ -33,7 +33,7 @@ namespace UbuntuServerDiscordBot.Services
         public async Task InitializeAsync(IServiceProvider provider)
         {
             _provider = provider;
-            await _commands.AddModulesAsync(Assembly.GetEntryAssembly());
+            await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
             // Add additional initialization code here...
         }
 

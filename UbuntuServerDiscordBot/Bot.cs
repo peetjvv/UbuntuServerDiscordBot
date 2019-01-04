@@ -115,7 +115,7 @@ namespace UbuntuServerDiscordBot
             var a = new EmbedBuilder();
             a.WithDescription($"Hi, I just started up and can be found at `{ipv4}` or `{ipv6}`");
             a.WithTimestamp(DateTime.UtcNow);
-            await ((ISocketMessageChannel)_client.GetChannel(ulong.Parse(_config["defaultChannel"]))).SendMessageAsync("", embed: a);
+            await ((ISocketMessageChannel)_client.GetChannel(ulong.Parse(_config["defaultChannel"]))).SendMessageAsync("", embed: a.Build());
         }
 
         private Task LoginStateAsync()

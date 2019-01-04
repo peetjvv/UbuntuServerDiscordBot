@@ -24,7 +24,7 @@ namespace UbuntuServerDiscordBot.Modules
                 $"`{Program.Configuration["prefix"]}info` - Who am I?\n" +
                 $"`{Program.Configuration["prefix"]}help` - What can I do? (this message)\n" +
                 $"`{Program.Configuration["prefix"]}ping` - Am I awake? What's my IP?");
-            await Context.Message.Channel.SendMessageAsync("", embed: a);
+            await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
         }
 
         [Command("ping")]
@@ -68,7 +68,7 @@ namespace UbuntuServerDiscordBot.Modules
 
             var a = new EmbedBuilder();
             a.WithDescription(message.ToString());
-            await Context.Message.Channel.SendMessageAsync("", embed: a);
+            await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
         }
 
         [Command("backup")]
