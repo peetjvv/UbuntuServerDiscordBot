@@ -12,7 +12,10 @@ namespace UbuntuServerDiscordBot.Modules
         [Command("info")]
         public async Task info()
         {
-
+            var a = new EmbedBuilder();
+            a.WithTitle(Context.Client.CurrentUser.Username);
+            a.WithDescription("Hi there, I'm a bot designed to show the system info of the PC that I'm running on. I'm written in .Net Core 2.1 and by using the Discord.Net 2.0.0 library.");
+            await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
         }
 
         [Command("help")]
@@ -23,8 +26,16 @@ namespace UbuntuServerDiscordBot.Modules
             a.WithDescription($"" +
                 $"`{Program.Configuration["prefix"]}info` - Who am I?\n" +
                 $"`{Program.Configuration["prefix"]}help` - What can I do? (this message)\n" +
-                $"`{Program.Configuration["prefix"]}ping` - Am I awake? What's my IP?");
+                $"`{Program.Configuration["prefix"]}backuphome` - Backup my Home dir\n" +
+                $"`{Program.Configuration["prefix"]}ping` - Am I awake? What's my IP?" +
+                $"`{Program.Configuration["prefix"]}status` - How is my HP looking?");
             await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
+        }
+
+        [Command("backuphome")]
+        public async Task backupHome()
+        {
+
         }
 
         [Command("ping")]
@@ -71,8 +82,8 @@ namespace UbuntuServerDiscordBot.Modules
             await Context.Message.Channel.SendMessageAsync("", embed: a.Build());
         }
 
-        [Command("backup")]
-        public async Task backup()
+        [Command("status")]
+        public async Task status()
         {
 
         }
