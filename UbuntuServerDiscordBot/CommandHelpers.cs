@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using UbuntuServerDiscordBot.Entities;
-using UbuntuServerDiscordBot.Serialization;
 
 namespace UbuntuServerDiscordBot
 {
@@ -44,7 +43,7 @@ namespace UbuntuServerDiscordBot
             {
                 topOutput = fileStream.ReadToEnd();
             }
-            return TopResponseDeserializer.Deserialize(topOutput);
+            return TopResponse.FromString(topOutput);
         }
 
         private static void ExecuteCommandAndSaveOutputToFile(string command, string outputFileName)

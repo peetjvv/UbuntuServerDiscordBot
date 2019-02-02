@@ -35,7 +35,7 @@ namespace UbuntuServerDiscordBot
 
             var bot = new Bot(Configuration, Logger);
             var botStartupTask = bot.StartAsync();
-            botStartupTask.Wait();
+            botStartupTask.Wait(); // this is the waiting for messages state
         }
     }
 }

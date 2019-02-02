@@ -85,7 +85,8 @@ namespace UbuntuServerDiscordBot.Modules
         [Command("status")]
         public async Task status()
         {
-            await Context.Message.Channel.SendMessageAsync(text: CommandHelpers.GetTopResponse());
+            var tr = CommandHelpers.GetTopResponse();
+            await Context.Message.Channel.SendMessageAsync(text: tr.ToString());
         }
     }
 }
